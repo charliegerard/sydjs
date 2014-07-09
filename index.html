@@ -43,64 +43,100 @@
 			<!-- Any section element inside of this container is displayed as a slide -->
 			<div class="slides">
 				<section>
-					<h1>Programming for robots</h1>
-					<h2>A world of wonders</h2>
+					<h1>A world of wonders</h1>
+					<h2>Programming for robots in JavaScript</h2>
 					<p>
 						<small>by <a href="http://charliegerard.github.io"> Charlie Gerard</a> / <a href="http://twitter.com/charlie__gerard">@charlie__gerard</a></small>
 					</p>
 				</section>
 
 				<section>
-					<h2>What is a robot?</h2>
-					<p>
-						<li>Good question...</li>
-						<li>Anything with a motherboard</li>
-						<li>A fancy word for hardware</li>
-						<li>All of these</li>
-					</p>
+					<blockquote>
+						&ldquo;You don't have the face of someone who's into robotics.&rdquo;
+					</blockquote>
+				</section>
 
-					<aside class="notes">
-						Oh hey, these are some notes. They'll be hidden in your presentation, but you can see them if you open the speaker notes window (hit 's' on your keyboard).
-					</aside>
+				<section>
+					<section>
+						<h1>What is a robot?</h1>
+
+						<p>A machine capable of carrying out a complex series of actions automatically, especially one programmable by a computer.</p>
+
+						<div class="r2d2">
+							<img src="http://upload.wikimedia.org/wikipedia/en/3/39/R2-D2_Droid.png">
+						</div>
+
+					</section>
+
+					<section>
+						<blockquote cite="http://gigaom.com/2014/07/05/what-is-a-robot-the-answer-is-constantly-evolving/">
+							&ldquo;People always think about a humanoid robot, but I think it’s the wrong approach. People usually call something robot, but they don’t know what it’s doing. Once the robot starts to solve some particular task, they stop calling it a robot. They call it vacuum cleaner, they call it machine or car.&rdquo;
+							<br><br>
+								Dmitry Grinshin
+						</blockquote>
+					</section>
 				</section>
 
 				<!-- Example of nested vertical slides -->
 				<section>
-					<section>
-						<h2>Vertical Slides</h2>
-						<p>
-							Slides can be nested inside of other slides,
-							try pressing <a href="#" class="navigate-down">down</a>.
-						</p>
-						<a href="#" class="image navigate-down">
-							<img width="178" height="238" src="https://s3.amazonaws.com/hakim-static/reveal-js/arrow.png" alt="Down arrow">
-						</a>
-					</section>
-					<section>
-						<h2>Basement Level 1</h2>
-						<p>Press down or up to navigate.</p>
-					</section>
-					<section>
-						<h2>Basement Level 2</h2>
-						<p>Cornify</p>
-						<a class="test" href="http://cornify.com">
-							<img width="280" height="326" src="https://s3.amazonaws.com/hakim-static/reveal-js/cornify.gif" alt="Unicorn">
-						</a>
-					</section>
-					<section>
-						<h2>Basement Level 3</h2>
-						<p>That's it, time to go back up.</p>
-						<a href="#/2" class="image">
-							<img width="178" height="238" src="https://s3.amazonaws.com/hakim-static/reveal-js/arrow.png" alt="Up arrow" style="-webkit-transform: rotate(180deg);">
-						</a>
+
+					<h2>Leap Motion and Sphero</h2>
+					<img src="https://dv2ab2hvr9d0l.cloudfront.net/assets/index/controller-7171dc02e3c347708bd9c66c89f0049c.png">
+					<img class="sphero" src="http://www.coolshitiget.com/wp-content/uploads/2014/03/GlossySphero.png" style="width: 150px">
+					<h2>Live demo...</h2>
+
+				</section>
+
+				<section>
+					<img src="http://img0.joyreactor.com/pics/post/robot-hand-cookie-fail-1309047.gif" style="width: 700px">
+				</section>
+
+				<section>
+					<section data-markdown>
+						<script type="text/template">
+							## But...HOW?
+							#### Node.js and modules
+
+							###### Spheron https://github.com/alchemycs/spheron
+
+							###### Leapjs https://github.com/leapmotion/leapjs
+
+							``` 		
+								npm install spheron
+								npm install leapjs
+							```
+						</script>
 					</section>
 				</section>
 
 				<section>
-					<h2>Slides</h2>
-					<p>
-						Not a coder? No problem. There's a fully-featured visual editor for authoring these, try it out at <a href="http://slid.es" target="_blank">http://slid.es</a>.
-					</p>
+					<section data-markdown>
+						<script type="text/template">
+							```
+								//require modules
+								var express = require('express'),
+								    path = require('path');
+
+								//create web server
+								var app = express();
+
+								//require the custom module
+								var test = require('./my_modules/sphero');
+								test();
+
+								// Everything in public will be accessible from '/'
+								app.use(express.static(path.join(__dirname, 'public')));
+								app.use(express.static(path.join(__dirname, 'views')));
+
+								app.all('*', function(req, res){
+								  res.sendfile('views/index.html');
+								});
+
+								app.listen(3001);
+								console.log("server running on port 3001");
+							```
+						</script>
+					</section>
 				</section>
 
 				<section>

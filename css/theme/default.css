@@ -146,3 +146,13 @@ body {
  *********************************************/
 .reveal .slide-number {
   color: #13daec; }
+
+.sphero{
+  display: inline-block;
+  margin-left: 10%;
+}
+
+/*.r2d2{
+  position: absolute;
+  display: block;
+}*/
