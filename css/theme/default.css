@@ -147,12 +147,54 @@ body {
 .reveal .slide-number {
   color: #13daec; }
 
-.sphero{
-  display: inline-block;
-  margin-left: 10%;
+.reveal section img.leap{
+  background-color: rgba(0,0,0,0);
+  box-shadow: none;
+  border: none;
 }
 
-/*.r2d2{
-  position: absolute;
+.reveal section img.sphero{
+  width: 400px;
+  display: inline-block;
+  margin-left: 10%;
+  background-color: rgba(0,0,0,0);
+  box-shadow: none;
+  border: none;
+}
+
+.coffeescript{
+  width: 2000px;
+}
+
+.reveal pre code{
+    width: 1250px;
+  margin-left: -200px;
+  max-height: 600px;
+}
+
+#robots_images{
   display: block;
-}*/
+  width: 1500px;
+  margin-left: -300px;
+}
+
+#r2d2{
+  display: inline-block;
+  border: none;
+  margin: 0 0;
+  background-color: rgba(0,0,0,0);
+  box-shadow: none;
+}
+
+#walle, #optimus, #roomba{
+  border: none;
+  display: inline-block;
+  background-color: rgba(0,0,0,0);
+  box-shadow: none;
+}
+
+#optimus{
+  width: 400px;
+}
+
+
