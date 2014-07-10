@@ -51,9 +51,16 @@
 				</section>
 
 				<section>
-					<blockquote>
-						&ldquo;You don't have the face of someone who's into robotics.&rdquo;
-					</blockquote>
+					<section id="fragments">
+						<h2>Why?</h2>
+						<li class="fragment">I f**ing love it</li>
+						<li class="fragment">Internet of Things</li>
+						<li class="fragment">Democratisation of electronics</li>
+						<li class="fragment">Robots are awesome</li>
+						<blockquote class="fragment">
+							&ldquo;You don't have the face of someone who's into robotics.&rdquo;
+						</blockquote>
+					</section>
 				</section>
 
 				<section>
@@ -72,23 +79,22 @@
 						<blockquote cite="http://gigaom.com/2014/07/05/what-is-a-robot-the-answer-is-constantly-evolving/">
 							&ldquo;People always think about a humanoid robot, but I think it’s the wrong approach. People usually call something robot, but they don’t know what it’s doing. Once the robot starts to solve some particular task, they stop calling it a robot. They call it vacuum cleaner, they call it machine or car.&rdquo;
 							<br><br>
-								Dmitry Grinshin
+								Dmitry Grinshin - Founder of Grinshin Robotics
 						</blockquote>
 					</section>
 				</section>
 
 				<!-- Example of nested vertical slides -->
 				<section>
-
 					<h2>Leap Motion and Sphero</h2>
 					<img src="https://dv2ab2hvr9d0l.cloudfront.net/assets/index/controller-7171dc02e3c347708bd9c66c89f0049c.png">
 					<img class="sphero" src="http://www.coolshitiget.com/wp-content/uploads/2014/03/GlossySphero.png" style="width: 150px">
-					<h2>Live demo...</h2>
-
 				</section>
 
-				<section>
-					<img src="http://img0.joyreactor.com/pics/post/robot-hand-cookie-fail-1309047.gif" style="width: 700px">
+				<section id="fragments2">
+					<h1>Live demo!</h1>
+					<h2 class="fragment">But first...</h2>
+					<img class="fragment" src="http://img0.joyreactor.com/pics/post/robot-hand-cookie-fail-1309047.gif" style="width: 600px">
 				</section>
 
 				<section>
@@ -104,6 +110,7 @@
 							``` 		
 								npm install spheron
 								npm install leapjs
+								npm install express
 							```
 						</script>
 					</section>
@@ -112,6 +119,7 @@
 				<section>
 					<section data-markdown>
 						<script type="text/template">
+							#####app.js file
 							```
 								//require modules
 								var express = require('express'),
@@ -137,45 +145,105 @@
 							```
 						</script>
 					</section>
+
+					<section data-markdown>
+						<script type="text/template">
+							##### module created
+							```
+								module.exports = function() {
+
+								  //require the needed modules
+								  var Leap = require('leapjs');
+								  var spheron = require('spheron');
+
+								  // Set this to the device Sphero connects as on your computer.
+								  var device = '/dev/tty.Sphero-RBR-AMP-SPP';
+
+								  var controlSphero = function(sphero) {
+       
+  									var controller = new Leap.Controller({frameEventName:'deviceFrame', enableGestures:true});
+
+  									    controller.on('frame', function(frame) {
+								          if (frame.gestures.length) {
+								            var g = frame.gestures[0];
+
+								            //Basically checks if there is movement. Need to try without the 'stop' one.
+								            if (g.type == 'swipe') { // && g.state ==='stop') {
+								              handleSwipe(g);
+								            }
+								          }
+     									});
+
+     									var handleSwipe = function(g) {
+								          // Checks the difference between the start position and the end position of the fingers on each axis.
+								          var X = g.position[0] - g.startPosition[0];
+								          var Y = g.position[1] - g.startPosition[1];
+								          var Z = g.position[2] - g.startPosition[2];
+
+								          // Gets the absolute values.
+								          var aX = Math.abs(X);
+								          var aY = Math.abs(Y);
+								          var aZ = Math.abs(Z);
+
+								          // Gets the maximum value to check in which direction the user moved its fingers.
+								          var big = Math.max(aX, aY, aZ);
+								          console.log(['x:', aX, 'y:', aY, 'z:', aZ].join(' '));
+								          // direction gets returned in the console. default value is '?'. Not necessary.
+								          var direction = '?';
+
+								          // If the maximum value returned is the X one, execute the cases called "LEFT" or "RIGHT".
+								          if (aX === big) {
+								            direction = 'RIGHT';
+								            if (X < 0) {
+								              direction = 'LEFT';
+								            }
+								          // If the maximum value returned is the Y one, execute the cases called "UP" or "DOWN".
+								          } else if (aY === big) {
+								            direction = 'UP';
+								            if (Y < 0) {
+								              direction = 'DOWN';
+								            }
+								          // If the maximum value returned is the Z one, execute the cases "FORWARD" or "REVERSE".
+								          } else if (aZ === big) {
+								            direction = 'REVERSE';
+								            if (Z < 0) {
+								              direction = 'FORWARD';
+								            }
+								          }
+								          controller.connect();
+								      }
+  								  }
+  								}
+
+							```
+						</script>
+					</section>
 				</section>
 
-				<section>
-					<h2>Point of View</h2>
-					<p>
-						Press <strong>ESC</strong> to enter the slide overview.
+				<section id="fragments3">
+					<h2>What's next?</h2>
+					<p class="fragment">
+						MYO armband
 					</p>
-					<p>
-						Hold down alt and click on any element to zoom in on it using <a href="http://lab.hakim.se/zoom-js">zoom.js</a>. Alt + click anywhere to zoom back out.
-					</p>
+					<img class="fragment" src="http://laughingsquid.com/wp-content/uploads/two_rings.png">
 				</section>
 
 				<section>
-					<h2>Works in Mobile Safari</h2>
-					<p>
-						Try it out! You can swipe through the slides and pinch your way to the overview.
-					</p>
+					<img src="http://media.idownloadblog.com/wp-content/uploads/2013/02/Thalmic-Labs-MYO-armband-technology-001.jpg">
+					<h2>
+						"the future"
+					</h2>
 				</section>
 
 				<section>
-					<h2>Marvelous Unordered List</h2>
-					<ul>
-						<li>No order here</li>
-						<li>Or here</li>
-						<li>Or here</li>
-						<li>Or here</li>
-					</ul>
+					<h2><a href="https://github.com/charliegerard/leap_sphero">Github Repo</a></h2>
 				</section>
 
 				<section>
-					<h2>Fantastic Ordered List</h2>
-					<ol>
-						<li>One is smaller than...</li>
-						<li>Two is smaller than...</li>
-						<li>Three!</li>
-					</ol>
+					<h1>Thank you!</h1>
 				</section>
 
-				<section data-markdown>
+				<!--<section data-markdown>
 					<script type="text/template">
 						## Markdown support
 
@@ -389,7 +457,7 @@ function linkify( selector ) {
 				<section>
 					<h1>THE END</h1>
 					<h3>BY Hakim El Hattab / hakim.se</h3>
-				</section>
+				</section>-->
 
 			</div>
 
