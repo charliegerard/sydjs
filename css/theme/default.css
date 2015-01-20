@@ -197,4 +197,15 @@ body {
   width: 400px;
 }
 
+section img.myo, section img.neurosky, section img.cylon, section img.leapmotion-drone-sphero{
+  border: none;
+  background: none;
+  box-shadow: none;
+}
+
+section.gif{
+  width: 1200px;
+}
+
+
 
